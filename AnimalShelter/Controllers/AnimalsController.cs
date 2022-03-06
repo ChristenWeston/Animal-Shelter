@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using AnimalShelter.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace AnimalShelter.Controllers
 {
@@ -18,6 +19,14 @@ namespace AnimalShelter.Controllers
     {
       List<Animal> model = _db.Animals.ToList();
       return View(model);
+    }
+
+    public ActionResult Type()
+    {
+      List<Animal> model = _db.Animals.ToList();
+      var sortedModel = _db.Animals.ToList().OrderBy(a => a.Type);
+      Console.WriteLine(sortedModel); 
+      return View(sortedModel);
     }
 
     public ActionResult Create()
@@ -40,5 +49,7 @@ namespace AnimalShelter.Controllers
       Animal thisAnimal = _db.Animals.FirstOrDefault(animal => animal.AnimalId == id);
       return View(thisAnimal);
     }
+
+
   }
 }
